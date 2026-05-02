@@ -5,10 +5,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
+import DifficultyPage from "./pages/DifficultyPage";
 import LevelsPage from "./pages/LevelsPage";
-import VowelGame from "./pages/VowelGame";
+import GamePage from "./pages/GamePage";
 import ProgressPage from "./pages/ProgressPage";
 import SettingsPage from "./pages/SettingsPage";
+import StorePage from "./pages/StorePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,10 +24,12 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/levels" element={<LevelsPage />} />
-            <Route path="/game/vowels" element={<VowelGame />} />
+            <Route path="/difficulty" element={<DifficultyPage />} />
+            <Route path="/levels/:difficulty" element={<LevelsPage />} />
+            <Route path="/game/:difficulty/:levelId" element={<GamePage />} />
             <Route path="/progress" element={<ProgressPage />} />
             <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/store" element={<StorePage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
