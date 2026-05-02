@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Lock, Star } from "lucide-react";
 import ComingSoonModal from "@/components/ComingSoonModal";
 import modiHappy from "@/assets/modi-rabbit-happy.png";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useSound } from "@/hooks/useSound";
+import { useSettings } from "@/hooks/useSettings";
 
 const LEVELS = [
-  { id: 1, name: "Vocales", unlocked: true, stars: 0 },
+  { id: 1, nameKey: "levels.vowels", unlocked: true },
   { id: 2, name: "Nivel 2", unlocked: false },
   { id: 3, name: "Nivel 3", unlocked: false },
   { id: 4, name: "Nivel 4", unlocked: false },
@@ -31,8 +34,13 @@ const LEVEL_COLORS = [
 const LevelsPage = () => {
   const navigate = useNavigate();
   const [showComingSoon, setShowComingSoon] = useState(false);
+  const { t } = useLanguage();
+  const { playClick, setEnabled } = useSound();
+  const { settings } = useSettings();
+  setEnabled(settings.soundEnabled);
 
   const handleLevelClick = (level: typeof LEVELS[0]) => {
+    playClick();
     if (level.unlocked) {
       navigate("/game/vowels");
     } else {
@@ -42,25 +50,20 @@ const LevelsPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <div className="flex items-center gap-3 p-4">
         <button onClick={() => navigate("/")} className="p-2 rounded-xl bg-card shadow-md">
           <ArrowLeft className="w-6 h-6 text-foreground" />
         </button>
-        <h1 className="font-display text-2xl text-foreground">Modo Básico</h1>
+        <h1 className="font-display text-2xl text-foreground">{t("levels.title")}</h1>
       </div>
 
-      {/* Modi helper */}
       <div className="flex items-center gap-3 px-4 mb-4">
         <img src={modiHappy} alt="Modi" className="w-14 h-14" width={512} height={512} loading="lazy" />
         <div className="bg-card rounded-2xl p-3 shadow-md flex-1">
-          <p className="font-body text-sm text-foreground font-semibold">
-            ¡Hola! Selecciona un nivel para comenzar a aprender 📚
-          </p>
+          <p className="font-body text-sm text-foreground font-semibold">{t("levels.hint")}</p>
         </div>
       </div>
 
-      {/* Levels Grid */}
       <div className="grid grid-cols-3 gap-4 px-4 pb-8">
         {LEVELS.map((level, i) => (
           <button
@@ -75,7 +78,9 @@ const LevelsPage = () => {
             {level.unlocked ? (
               <>
                 <span className="font-display text-2xl text-primary-foreground">{level.id}</span>
-                <span className="font-body text-xs text-primary-foreground/80 font-semibold mt-1">{level.name}</span>
+                <span className="font-body text-xs text-primary-foreground/80 font-semibold mt-1">
+                  {level.nameKey ? t(level.nameKey) : level.name}
+                </span>
                 <div className="flex gap-0.5 mt-1">
                   {[1, 2, 3].map((s) => (
                     <Star key={s} className="w-3 h-3 text-accent fill-accent/30" />
