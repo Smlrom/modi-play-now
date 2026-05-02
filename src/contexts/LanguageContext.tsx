@@ -170,8 +170,9 @@ const translations: Record<Lang, Record<string, string>> = {
     "store.unlocked": "Débloqué", "store.levels": "niveaux",
     "lang.es": "Español", "lang.en": "English", "lang.pt": "Português", "lang.fr": "Français",
   },
+};
 
-interface LanguageContextType {
+
   lang: Lang;
   setLang: (lang: Lang) => void;
   t: (key: string, params?: Record<string, string>) => string;
