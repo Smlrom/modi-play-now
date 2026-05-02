@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import modiHappy from "@/assets/modi-rabbit-happy.png";
-import { Play, BarChart3, ShoppingBag, Settings, Globe } from "lucide-react";
+import { Play, BarChart3, ShoppingBag, Settings } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSound } from "@/hooks/useSound";
 import { useSettings } from "@/hooks/useSettings";
@@ -17,7 +17,6 @@ const Index = () => {
     { label: t("menu.progress"), icon: BarChart3, path: "/progress", color: "bg-modi-green text-primary-foreground" },
     { label: t("menu.store"), icon: ShoppingBag, path: "#", color: "bg-modi-orange text-primary-foreground" },
     { label: t("menu.settings"), icon: Settings, path: "/settings", color: "bg-modi-purple text-primary-foreground" },
-    { label: t("menu.language"), icon: Globe, path: "/settings", color: "bg-secondary text-secondary-foreground" },
   ];
 
   const handleClick = (path: string) => {
