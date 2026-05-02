@@ -1,0 +1,211 @@
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+
+export type Lang = "es" | "en" | "pt" | "fr";
+
+const translations: Record<Lang, Record<string, string>> = {
+  es: {
+    "app.title": "Modi",
+    "app.subtitle": "¡Aprende jugando! 🎮",
+    "app.greeting": "¡Hola! Soy {name}. ¿Listo para aprender? 🐰",
+    "menu.start": "Comenzar",
+    "menu.progress": "Progreso",
+    "menu.store": "Tienda",
+    "menu.settings": "Configuración",
+    "menu.language": "Lenguaje",
+    "levels.title": "Modo Básico",
+    "levels.hint": "¡Hola! Selecciona un nivel para comenzar a aprender 📚",
+    "levels.vowels": "Vocales",
+    "coming_soon.title": "¡Próximamente!",
+    "coming_soon.text": "Estamos preparando nuevas lecciones para ti. ¡Vuelve pronto! 🚀",
+    "coming_soon.ok": "Entendido",
+    "game.which_vowel": "¿Cuál es esta vocal?",
+    "game.starts_with": "¿Con qué vocal empieza '{word}'?",
+    "victory.title": "¡Excelente!",
+    "victory.text": "¡Lo lograste! 🎉",
+    "victory.continue": "Continuar",
+    "defeat.title": "¡Sigue intentando!",
+    "defeat.text": "No te rindas, tú puedes 💪",
+    "defeat.retry": "Reintentar",
+    "progress.title": "Mi Progreso",
+    "progress.levels_completed": "Niveles completados",
+    "progress.total_failures": "Intentos fallidos",
+    "progress.total_clicks": "Clicks totales",
+    "progress.history": "Historial",
+    "progress.victory": "Victoria",
+    "progress.defeat": "Derrota",
+    "progress.no_data": "¡Aún no hay datos! Comienza a jugar 🎮",
+    "settings.title": "Configuración",
+    "settings.sound": "Sonido",
+    "settings.bg_color": "Color de fondo",
+    "settings.language": "Idioma",
+    "settings.back": "Volver",
+    "lang.es": "Español",
+    "lang.en": "English",
+    "lang.pt": "Português",
+    "lang.fr": "Français",
+  },
+  en: {
+    "app.title": "Modi",
+    "app.subtitle": "Learn by playing! 🎮",
+    "app.greeting": "Hi! I'm {name}. Ready to learn? 🐰",
+    "menu.start": "Start",
+    "menu.progress": "Progress",
+    "menu.store": "Store",
+    "menu.settings": "Settings",
+    "menu.language": "Language",
+    "levels.title": "Basic Mode",
+    "levels.hint": "Hi! Select a level to start learning 📚",
+    "levels.vowels": "Vowels",
+    "coming_soon.title": "Coming Soon!",
+    "coming_soon.text": "We're preparing new lessons for you. Come back soon! 🚀",
+    "coming_soon.ok": "Got it",
+    "game.which_vowel": "Which vowel is this?",
+    "game.starts_with": "What vowel does '{word}' start with?",
+    "victory.title": "Excellent!",
+    "victory.text": "You did it! 🎉",
+    "victory.continue": "Continue",
+    "defeat.title": "Keep trying!",
+    "defeat.text": "Don't give up, you can do it! 💪",
+    "defeat.retry": "Retry",
+    "progress.title": "My Progress",
+    "progress.levels_completed": "Levels completed",
+    "progress.total_failures": "Failed attempts",
+    "progress.total_clicks": "Total clicks",
+    "progress.history": "History",
+    "progress.victory": "Victory",
+    "progress.defeat": "Defeat",
+    "progress.no_data": "No data yet! Start playing 🎮",
+    "settings.title": "Settings",
+    "settings.sound": "Sound",
+    "settings.bg_color": "Background color",
+    "settings.language": "Language",
+    "settings.back": "Back",
+    "lang.es": "Español",
+    "lang.en": "English",
+    "lang.pt": "Português",
+    "lang.fr": "Français",
+  },
+  pt: {
+    "app.title": "Modi",
+    "app.subtitle": "Aprenda brincando! 🎮",
+    "app.greeting": "Olá! Eu sou {name}. Pronto para aprender? 🐰",
+    "menu.start": "Começar",
+    "menu.progress": "Progresso",
+    "menu.store": "Loja",
+    "menu.settings": "Configurações",
+    "menu.language": "Idioma",
+    "levels.title": "Modo Básico",
+    "levels.hint": "Olá! Selecione um nível para começar a aprender 📚",
+    "levels.vowels": "Vogais",
+    "coming_soon.title": "Em breve!",
+    "coming_soon.text": "Estamos preparando novas lições para você. Volte em breve! 🚀",
+    "coming_soon.ok": "Entendi",
+    "game.which_vowel": "Qual é esta vogal?",
+    "game.starts_with": "Com qual vogal começa '{word}'?",
+    "victory.title": "Excelente!",
+    "victory.text": "Você conseguiu! 🎉",
+    "victory.continue": "Continuar",
+    "defeat.title": "Continue tentando!",
+    "defeat.text": "Não desista, você consegue! 💪",
+    "defeat.retry": "Tentar novamente",
+    "progress.title": "Meu Progresso",
+    "progress.levels_completed": "Níveis completados",
+    "progress.total_failures": "Tentativas falhadas",
+    "progress.total_clicks": "Cliques totais",
+    "progress.history": "Histórico",
+    "progress.victory": "Vitória",
+    "progress.defeat": "Derrota",
+    "progress.no_data": "Ainda sem dados! Comece a jogar 🎮",
+    "settings.title": "Configurações",
+    "settings.sound": "Som",
+    "settings.bg_color": "Cor de fundo",
+    "settings.language": "Idioma",
+    "settings.back": "Voltar",
+    "lang.es": "Español",
+    "lang.en": "English",
+    "lang.pt": "Português",
+    "lang.fr": "Français",
+  },
+  fr: {
+    "app.title": "Modi",
+    "app.subtitle": "Apprends en jouant ! 🎮",
+    "app.greeting": "Salut ! Je suis {name}. Prêt à apprendre ? 🐰",
+    "menu.start": "Commencer",
+    "menu.progress": "Progrès",
+    "menu.store": "Boutique",
+    "menu.settings": "Paramètres",
+    "menu.language": "Langue",
+    "levels.title": "Mode Basique",
+    "levels.hint": "Salut ! Sélectionne un niveau pour commencer à apprendre 📚",
+    "levels.vowels": "Voyelles",
+    "coming_soon.title": "Bientôt !",
+    "coming_soon.text": "Nous préparons de nouvelles leçons pour toi. Reviens vite ! 🚀",
+    "coming_soon.ok": "Compris",
+    "game.which_vowel": "Quelle est cette voyelle ?",
+    "game.starts_with": "Par quelle voyelle commence '{word}' ?",
+    "victory.title": "Excellent !",
+    "victory.text": "Tu as réussi ! 🎉",
+    "victory.continue": "Continuer",
+    "defeat.title": "Continue d'essayer !",
+    "defeat.text": "N'abandonne pas, tu peux le faire ! 💪",
+    "defeat.retry": "Réessayer",
+    "progress.title": "Mon Progrès",
+    "progress.levels_completed": "Niveaux terminés",
+    "progress.total_failures": "Tentatives échouées",
+    "progress.total_clicks": "Clics totaux",
+    "progress.history": "Historique",
+    "progress.victory": "Victoire",
+    "progress.defeat": "Défaite",
+    "progress.no_data": "Pas encore de données ! Commence à jouer 🎮",
+    "settings.title": "Paramètres",
+    "settings.sound": "Son",
+    "settings.bg_color": "Couleur de fond",
+    "settings.language": "Langue",
+    "settings.back": "Retour",
+    "lang.es": "Español",
+    "lang.en": "English",
+    "lang.pt": "Português",
+    "lang.fr": "Français",
+  },
+};
+
+interface LanguageContextType {
+  lang: Lang;
+  setLang: (lang: Lang) => void;
+  t: (key: string, params?: Record<string, string>) => string;
+}
+
+const LanguageContext = createContext<LanguageContextType | null>(null);
+
+export const LanguageProvider = ({ children }: { children: ReactNode }) => {
+  const [lang, setLangState] = useState<Lang>(() => {
+    return (localStorage.getItem("modi-lang") as Lang) || "es";
+  });
+
+  const setLang = (l: Lang) => {
+    setLangState(l);
+    localStorage.setItem("modi-lang", l);
+  };
+
+  const t = (key: string, params?: Record<string, string>) => {
+    let text = translations[lang]?.[key] || translations.es[key] || key;
+    if (params) {
+      Object.entries(params).forEach(([k, v]) => {
+        text = text.replace(`{${k}}`, v);
+      });
+    }
+    return text;
+  };
+
+  return (
+    <LanguageContext.Provider value={{ lang, setLang, t }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+export const useLanguage = () => {
+  const ctx = useContext(LanguageContext);
+  if (!ctx) throw new Error("useLanguage must be inside LanguageProvider");
+  return ctx;
+};
