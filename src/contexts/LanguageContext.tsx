@@ -172,7 +172,7 @@ const translations: Record<Lang, Record<string, string>> = {
   },
 };
 
-
+interface LanguageContextType {
   lang: Lang;
   setLang: (lang: Lang) => void;
   t: (key: string, params?: Record<string, string>) => string;
