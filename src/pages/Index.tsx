@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import modiHappy from "@/assets/modi-rabbit-happy.png";
-import { Play, BarChart3, ShoppingBag, Settings, Globe } from "lucide-react";
+import { Play, BarChart3, ShoppingBag, Settings } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSound } from "@/hooks/useSound";
 import { useSettings } from "@/hooks/useSettings";
