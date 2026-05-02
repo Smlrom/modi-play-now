@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import modiHappy from "@/assets/modi-rabbit-happy.png";
 import { Play, BarChart3, ShoppingBag, Settings } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSound } from "@/hooks/useSound";
 import { useSettings } from "@/hooks/useSettings";
+import SplashScreen from "@/components/SplashScreen";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -12,16 +14,28 @@ const Index = () => {
   const { settings } = useSettings();
   setEnabled(settings.soundEnabled);
 
+  const [showSplash, setShowSplash] = useState(() => {
+    const seen = sessionStorage.getItem("modi-splash-seen");
+    return !seen;
+  });
+
+  const handleSplashFinish = () => {
+    sessionStorage.setItem("modi-splash-seen", "1");
+    setShowSplash(false);
+  };
+
+  if (showSplash) return <SplashScreen onFinish={handleSplashFinish} />;
+
   const MENU_ITEMS = [
-    { label: t("menu.start"), icon: Play, path: "/levels", color: "bg-primary text-primary-foreground" },
+    { label: t("menu.start"), icon: Play, path: "/difficulty", color: "bg-primary text-primary-foreground" },
     { label: t("menu.progress"), icon: BarChart3, path: "/progress", color: "bg-modi-green text-primary-foreground" },
-    { label: t("menu.store"), icon: ShoppingBag, path: "#", color: "bg-modi-orange text-primary-foreground" },
+    { label: t("menu.store"), icon: ShoppingBag, path: "/store", color: "bg-modi-orange text-primary-foreground" },
     { label: t("menu.settings"), icon: Settings, path: "/settings", color: "bg-modi-purple text-primary-foreground" },
   ];
 
   const handleClick = (path: string) => {
     playClick();
-    if (path !== "#") navigate(path);
+    navigate(path);
   };
 
   return (
