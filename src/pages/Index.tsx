@@ -17,7 +17,6 @@ const Index = () => {
     { label: t("menu.progress"), icon: BarChart3, path: "/progress", color: "bg-modi-green text-primary-foreground" },
     { label: t("menu.store"), icon: ShoppingBag, path: "#", color: "bg-modi-orange text-primary-foreground" },
     { label: t("menu.settings"), icon: Settings, path: "/settings", color: "bg-modi-purple text-primary-foreground" },
-    { label: t("menu.language"), icon: Globe, path: "/settings", color: "bg-secondary text-secondary-foreground" },
   ];
 
   const handleClick = (path: string) => {
