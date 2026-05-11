@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import VictoryModal from "@/components/VictoryModal";
 import DefeatModal from "@/components/DefeatModal";
+import AnswerFeedback from "@/components/AnswerFeedback";
 import modiHappy from "@/assets/modi-rabbit-happy.png";
 import { ArrowLeft, Heart, Timer } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -159,6 +160,12 @@ const GamePage = () => {
         <img src={modiHappy} alt="Modi" className="w-16 h-16 mt-6 animate-float" loading="lazy" />
       </div>
 
+      {selectedAnswer !== null && isCorrectAnswer !== null && !showVictory && !showDefeat && (
+        <AnswerFeedback
+          type={isCorrectAnswer ? "correct" : "wrong"}
+          attemptsLeft={3 - errors}
+        />
+      )}
       {showVictory && <VictoryModal onContinue={() => navigate(`/levels/${difficulty}`)} />}
       {showDefeat && <DefeatModal onRetry={handleRetry} />}
     </div>
