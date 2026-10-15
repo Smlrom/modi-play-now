@@ -180,24 +180,36 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
+const isLang = (value: string | null): value is Lang =>
+  value === "es" || value === "en" || value === "pt" || value === "fr";
+
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLangState] = useState<Lang>(() => {
-    return (localStorage.getItem("modi-lang") as Lang) || "es";
+    try {
+      const saved = localStorage.getItem("modi-lang");
+      return isLang(saved) ? saved : "es";
+    } catch {
+      return "es";
+    }
   });
 
-  const setLang = (l: Lang) => {
-    setLangState(l);
-    localStorage.setItem("modi-lang", l);
+  const setLang = (nextLang: Lang) => {
+    setLangState(nextLang);
+    try {
+      localStorage.setItem("modi-lang", nextLang);
+    } catch {
+      // The language still changes for this session if storage is unavailable.
+    }
   };
 
   const t = (key: string, params?: Record<string, string>) => {
-    let text = translations[lang]?.[key] || translations.es[key] || key;
+    let translated = translations[lang]?.[key] || translations.es[key] || key;
     if (params) {
-      Object.entries(params).forEach(([k, v]) => {
-        text = text.replace(`{${k}}`, v);
+      Object.entries(params).forEach(([param, value]) => {
+        translated = translated.replace(`{${param}}`, value);
       });
     }
-    return text;
+    return translated;
   };
 
   return (
