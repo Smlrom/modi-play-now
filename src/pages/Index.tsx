@@ -67,7 +67,7 @@ const Index = () => {
       <div className="bg-card rounded-2xl px-6 py-4 shadow-lg mb-8 max-w-xs text-center relative">
         <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-card rotate-45 shadow-sm" />
         <p className="font-body text-foreground text-sm font-semibold">{t("app.greeting", { name: "Modi" })}</p>
-        {selectedSkin.id !== "classic" && <p className="font-body text-xs text-muted-foreground mt-1">{t("store.${selectedSkin.id}")}</p>}
+        {selectedSkin.id !== "classic" && <p className="font-body text-xs text-muted-foreground mt-1">{t(`store.${selectedSkin.id}`)}</p>}
       </div>
 
       <div className="w-full max-w-xs flex flex-col gap-3">
