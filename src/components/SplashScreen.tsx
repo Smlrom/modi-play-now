@@ -1,21 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import modiHappy from "@/assets/modi-rabbit-happy.png";
 
 const SplashScreen = ({ onFinish }: { onFinish: () => void }) => {
   const [progress, setProgress] = useState(0);
+  const finishTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((p) => {
         if (p >= 100) {
           clearInterval(interval);
-          setTimeout(onFinish, 400);
+          finishTimeoutRef.current = setTimeout(onFinish, 400);
           return 100;
         }
         return p + 2;
       });
     }, 50);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (finishTimeoutRef.current !== null) clearTimeout(finishTimeoutRef.current);
+    };
   }, [onFinish]);
 
   return (

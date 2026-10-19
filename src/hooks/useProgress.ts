@@ -12,23 +12,43 @@ export interface ProgressData {
   levelsCompleted: number[];
   records: GameRecord[];
   totalClicks: number;
+  selectedSkin: string;
 }
 
 const STORAGE_KEY = "modi-progress";
 
+const DEFAULT_PROGRESS: ProgressData = {
+  levelsCompleted: [],
+  records: [],
+  totalClicks: 0,
+  selectedSkin: "classic",
+};
+
 const loadProgress = (): ProgressData => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch {}
-  return { levelsCompleted: [], records: [], totalClicks: 0 };
+    if (!raw) return DEFAULT_PROGRESS;
+    const saved = JSON.parse(raw) as Partial<ProgressData>;
+    return {
+      levelsCompleted: Array.isArray(saved.levelsCompleted) ? saved.levelsCompleted : [],
+      records: Array.isArray(saved.records) ? saved.records : [],
+      totalClicks: typeof saved.totalClicks === "number" ? saved.totalClicks : 0,
+      selectedSkin: typeof saved.selectedSkin === "string" ? saved.selectedSkin : "classic",
+    };
+  } catch {
+    return DEFAULT_PROGRESS;
+  }
 };
 
 export const useProgress = () => {
   const [data, setData] = useState<ProgressData>(loadProgress);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch {
+      // Progress remains available for this session if browser storage is disabled/full.
+    }
   }, [data]);
 
   const addRecord = useCallback((record: Omit<GameRecord, "date">) => {
@@ -38,11 +58,7 @@ export const useProgress = () => {
         record.result === "victory" && !prev.levelsCompleted.includes(record.levelId)
           ? [...prev.levelsCompleted, record.levelId]
           : prev.levelsCompleted;
-      return {
-        levelsCompleted: newCompleted,
-        records: newRecords,
-        totalClicks: prev.totalClicks + record.clicks,
-      };
+      return { ...prev, levelsCompleted: newCompleted, records: newRecords };
     });
   }, []);
 
@@ -50,5 +66,9 @@ export const useProgress = () => {
     setData((prev) => ({ ...prev, totalClicks: prev.totalClicks + 1 }));
   }, []);
 
-  return { progress: data, addRecord, addClick };
+  const selectSkin = useCallback((skinId: string) => {
+    setData((prev) => ({ ...prev, selectedSkin: skinId }));
+  }, []);
+
+  return { progress: data, addRecord, addClick, selectSkin };
 };
