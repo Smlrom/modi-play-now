@@ -73,10 +73,10 @@ const GamePage = () => {
 
   // One stable interval; it does not restart on every second.
   useEffect(() => {
-    if (!isTimed || showVictory || showDefeat || gameEndedRef.current) return;
+    if (!isTimed || showVictory || showDefeat || selectedAnswer !== null || gameEndedRef.current) return;
     const timer = setInterval(() => setTimeLeft((remaining) => Math.max(0, remaining - 1)), 1000);
     return () => clearInterval(timer);
-  }, [isTimed, showVictory, showDefeat]);
+  }, [isTimed, selectedAnswer, showVictory, showDefeat]);
 
   useEffect(() => {
     if (isTimed && timeLeft === 0 && !showVictory && !showDefeat) finishDefeat();
