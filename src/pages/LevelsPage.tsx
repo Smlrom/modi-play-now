@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Lock, Star, CheckCircle } from "lucide-react";
+import { ArrowLeft, Lock, Star, CheckCircle, Compass } from "lucide-react";
 import ComingSoonModal from "@/components/ComingSoonModal";
 import modiHappy from "@/assets/modi-rabbit-happy.png";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -54,7 +54,7 @@ const LevelsPage = () => {
   const navigate = useNavigate();
   const { difficulty } = useParams<{ difficulty: string }>();
   const diff = difficulty || "basic";
-  const [showComingSoon, setShowComingSoon] = useState(false);
+  const [comingSoonMessage, setComingSoonMessage] = useState<"locked" | "adventure" | null>(null);
   const { t } = useLanguage();
   const { playClick, setEnabled } = useSound();
   const { settings } = useSettings();
@@ -69,7 +69,7 @@ const LevelsPage = () => {
     if (unlocked) {
       navigate(`/game/${diff}/${level.id}`);
     } else {
-      setShowComingSoon(true);
+      setComingSoonMessage("locked");
     }
   };
 
@@ -134,7 +134,17 @@ const LevelsPage = () => {
         })}
       </div>
 
-      {showComingSoon && <ComingSoonModal onClose={() => setShowComingSoon(false)} />}
+      <div className="px-4 pb-8 -mt-2">
+        <button
+          onClick={() => { playClick(); setComingSoonMessage("adventure"); }}
+          className="w-full rounded-2xl border-2 border-modi-purple bg-card px-5 py-4 flex items-center justify-center gap-3 shadow-md hover:bg-modi-purple/10 transition-colors"
+        >
+          <Compass className="w-5 h-5 text-modi-purple" />
+          <span className="font-display text-base text-foreground">{t("levels.adventure")}</span>
+        </button>
+      </div>
+
+      {comingSoonMessage && <ComingSoonModal messageKey={comingSoonMessage === "adventure" ? "coming_soon.adventure_text" : undefined} onClose={() => setComingSoonMessage(null)} />}
     </div>
   );
 };

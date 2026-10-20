@@ -9,7 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useSound } from "@/hooks/useSound";
 import { useProgress } from "@/hooks/useProgress";
 import { useSettings } from "@/hooks/useSettings";
-import { getQuestionsForLevel, getLevelInfo } from "@/data/levels";
+import { getQuestionsForLevel, getLevelInfo, type GameQuestion } from "@/data/levels";
 const DIFFICULTY_TIME_SECONDS = 15;
 
 const GamePage = () => {
@@ -25,9 +25,8 @@ const GamePage = () => {
   const activeDifficulty = difficulty || "basic";
   const levelInfo = getLevelInfo(activeDifficulty, levelNum);
   // Generate the question set once per level. Previously every timer tick re-shuffled it.
-  const questions = useMemo(
-    () => getQuestionsForLevel(activeDifficulty, levelNum),
-    [activeDifficulty, levelNum],
+  const [questions, setQuestions] = useState<GameQuestion[]>(() =>
+    getQuestionsForLevel(activeDifficulty, levelNum),
   );
   const isTimed = activeDifficulty === "difficult";
 
@@ -151,7 +150,8 @@ const GamePage = () => {
     setSelectedAnswer(null);
     setIsCorrectAnswer(null);
     setTimeLeft(DIFFICULTY_TIME_SECONDS);
-  }, [clearAnswerTimeout]);
+    setQuestions(getQuestionsForLevel(activeDifficulty, levelNum));
+  }, [activeDifficulty, clearAnswerTimeout, levelNum]);
 
   const getOptionStyle = (option: string) => {
     if (selectedAnswer === null) return "bg-card border-2 border-border shadow-md hover:shadow-lg hover:scale-105";
