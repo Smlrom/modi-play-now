@@ -168,22 +168,33 @@ const PHRASE_QS: GameQuestion[] = [
 // ── Question generators ──
 export function getQuestionsForLevel(difficulty: string, level: number): GameQuestion[] {
   const count = 5;
+  let selected: GameQuestion[];
 
   if (difficulty === "basic") {
-    if (level <= 3) return pick(VOWEL_QS, count);
-    if (level <= 6) return pick(ALPHABET_QS, count);
-    return pick(NUMBER_QS, count);
+    if (level <= 3) selected = pick(VOWEL_QS, count);
+    else if (level <= 6) selected = pick(ALPHABET_QS, count);
+    else selected = pick(NUMBER_QS, count);
+  } else if (difficulty === "normal") {
+    selected = pick(WORD_QS, count);
+  } else if (difficulty === "advanced" || difficulty === "difficult") {
+    selected = pick(PHRASE_QS, count);
+  } else {
+    selected = pick(VOWEL_QS, count);
   }
 
-  if (difficulty === "normal") {
-    return pick(WORD_QS, count);
-  }
-
-  if (difficulty === "advanced" || difficulty === "difficult") {
-    return pick(PHRASE_QS, count);
-  }
-
-  return pick(VOWEL_QS, count);
+  // Shuffle every question's choices and avoid placing the correct answer
+  // in the same position on consecutive questions whenever possible.
+  let previousCorrectIndex = -1;
+  return selected.map((question) => {
+    let options = shuffle(question.options);
+    let correctIndex = options.indexOf(question.correct);
+    if (correctIndex === previousCorrectIndex && options.length > 1) {
+      options = [...options.slice(1), options[0]];
+      correctIndex = options.indexOf(question.correct);
+    }
+    previousCorrectIndex = correctIndex;
+    return { ...question, options };
+  });
 }
 
 // ── Level unlock logic ──
