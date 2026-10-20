@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import modiHappy from "@/assets/modi-rabbit-happy.png";
+import ModiCharacter from "@/components/ModiCharacter";
 import { Play, BarChart3, ShoppingBag, Settings } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSound } from "@/hooks/useSound";
@@ -57,10 +57,7 @@ const Index = () => {
       <div className="relative mb-8">
         <div className="absolute -inset-4 bg-primary/10 rounded-full blur-2xl" />
         <div className="relative">
-          <img src={modiHappy} alt="Modi el conejito" className="relative w-48 h-48 animate-float object-contain" width={512} height={512} />
-          {selectedSkin.id !== "classic" && (
-            <span className="absolute top-2 right-1 text-5xl drop-shadow-sm" role="img" aria-label={t(`store.${selectedSkin.id}`)}>{selectedSkin.emoji}</span>
-          )}
+          <ModiCharacter skinId={selectedSkin.id} size="large" className="animate-float" />
         </div>
       </div>
 
