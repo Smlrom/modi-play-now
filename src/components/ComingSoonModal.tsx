@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ComingSoonModalProps {
   onClose: () => void;
+  messageKey?: string;
 }
 
 const ComingSoonModal = ({ onClose, messageKey = "coming_soon.text" }: ComingSoonModalProps) => {
