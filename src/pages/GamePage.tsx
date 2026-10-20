@@ -3,16 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import VictoryModal from "@/components/VictoryModal";
 import DefeatModal from "@/components/DefeatModal";
 import AnswerFeedback from "@/components/AnswerFeedback";
-import modiHappy from "@/assets/modi-rabbit-happy.png";
+import ModiCharacter from "@/components/ModiCharacter";
 import { ArrowLeft, Heart, Timer } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSound } from "@/hooks/useSound";
 import { useProgress } from "@/hooks/useProgress";
 import { useSettings } from "@/hooks/useSettings";
 import { getQuestionsForLevel, getLevelInfo } from "@/data/levels";
-import { getSkinById } from "@/data/skins";
-
-const DIFFICULTY_TIME_SECONDS = 35;
+const DIFFICULTY_TIME_SECONDS = 15;
 
 const GamePage = () => {
   const navigate = useNavigate();
@@ -32,7 +30,6 @@ const GamePage = () => {
     [activeDifficulty, levelNum],
   );
   const isTimed = activeDifficulty === "difficult";
-  const selectedSkin = getSkinById(progress.selectedSkin);
 
   const [currentQ, setCurrentQ] = useState(0);
   const [errors, setErrors] = useState(0);
@@ -210,10 +207,7 @@ const GamePage = () => {
         </div>
 
         <div className="relative mt-6">
-          <img src={modiHappy} alt="Modi" className="w-16 h-16 animate-float" loading="lazy" />
-          {selectedSkin.id !== "classic" && (
-            <span className="absolute -top-2 -right-3 text-2xl" role="img" aria-label={selectedSkin.label}>{selectedSkin.emoji}</span>
-          )}
+          <ModiCharacter skinId={progress.selectedSkin} size="small" className="animate-float" />
         </div>
       </div>
 

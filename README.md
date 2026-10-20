@@ -21,7 +21,7 @@ La versión actual organiza los retos en cuatro categorías de dificultad:
 - **Avanzada:** práctica mediante frases.
 - **Difícil:** retos contrarreloj para poner a prueba lo aprendido.
 
-En el modo difícil, cada partida dispone de un temporizador de 35 segundos. Las respuestas incluyen retroalimentación y las partidas terminan con un resultado de victoria o derrota.
+En el modo difícil, cada partida dispone de un temporizador de 15 segundos. Las respuestas incluyen retroalimentación y las partidas terminan con un resultado de victoria o derrota.
 
 ## 🏆 Progreso, retos y skins
 

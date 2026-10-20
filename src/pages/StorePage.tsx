@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Lock, Check, Shirt } from "lucide-react";
-import modiHappy from "@/assets/modi-rabbit-happy.png";
+import ModiCharacter from "@/components/ModiCharacter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSound } from "@/hooks/useSound";
 import { useSettings } from "@/hooks/useSettings";
@@ -34,8 +34,7 @@ const StorePage = () => {
 
       <div className="flex items-center gap-3 px-4 mb-6">
         <div className="relative shrink-0">
-          <img src={modiHappy} alt="Modi" className="w-16 h-16" />
-          {activeSkin.id !== "classic" && <span className="absolute -top-2 -right-2 text-2xl" role="img" aria-label={t(`store.${activeSkin.id}`)}>{activeSkin.emoji}</span>}
+          <ModiCharacter skinId={activeSkin.id} size="medium" />
         </div>
         <div className="bg-card rounded-2xl p-3 shadow-md flex-1">
           <p className="font-body text-sm text-foreground font-semibold">{t("store.hint")}</p>
@@ -57,8 +56,7 @@ const StorePage = () => {
               className={`relative rounded-2xl p-5 flex flex-col items-center gap-3 shadow-lg transition-all text-center ${selected ? "bg-primary/10 border-2 border-primary" : unlocked ? "bg-card border-2 border-border hover:border-primary/60" : "bg-muted opacity-80"}`}
             >
               <div className="relative">
-                <img src={modiHappy} alt="" className={`w-20 h-20 object-contain ${!unlocked ? "grayscale" : ""}`} />
-                {skin.id !== "classic" && <span className="absolute -top-1 -right-2 text-2xl" aria-hidden="true">{skin.emoji}</span>}
+                <ModiCharacter skinId={skin.id} size="large" className={!unlocked ? "grayscale" : ""} />
               </div>
               <span className="font-display text-base text-foreground">{t(`store.${skin.id}`)}</span>
 
