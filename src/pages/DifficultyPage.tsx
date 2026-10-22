@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, GraduationCap, Flame, Zap } from "lucide-react";
+import { ArrowLeft, BookOpen, GraduationCap, Flame, Zap, Compass } from "lucide-react";
+import ComingSoonModal from "@/components/ComingSoonModal";
 import modiHappy from "@/assets/modi-rabbit-happy.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSound } from "@/hooks/useSound";
@@ -7,6 +9,7 @@ import { useSettings } from "@/hooks/useSettings";
 
 const DifficultyPage = () => {
   const navigate = useNavigate();
+  const [showAdventureNotice, setShowAdventureNotice] = useState(false);
   const { t } = useLanguage();
   const { playClick, setEnabled } = useSound();
   const { settings } = useSettings();
@@ -52,6 +55,26 @@ const DifficultyPage = () => {
           </button>
         ))}
       </div>
+
+      <div className="px-4 pb-8">
+        <button
+          type="button"
+          onClick={() => { playClick(); setShowAdventureNotice(true); }}
+          className="w-full rounded-2xl border-2 border-modi-purple bg-card p-5 flex items-center gap-4 shadow-lg hover:bg-modi-purple/10 hover:scale-[1.02] transition-all"
+        >
+          <div className="rounded-xl p-3 bg-modi-purple/10">
+            <Compass className="w-8 h-8 text-modi-purple" />
+          </div>
+          <div className="text-left">
+            <span className="font-display text-xl text-foreground block">{t("levels.adventure")}</span>
+            <span className="font-body text-xs text-muted-foreground">{t("coming_soon.title")}</span>
+          </div>
+        </button>
+      </div>
+
+      {showAdventureNotice && (
+        <ComingSoonModal messageKey="coming_soon.adventure_text" onClose={() => setShowAdventureNotice(false)} />
+      )}
     </div>
   );
 };
