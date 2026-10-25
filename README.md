@@ -2,7 +2,7 @@
 
 **Modi** es un proyecto educativo interactivo pensado para que niñas y niños practiquen habilidades iniciales de lectura y reconocimiento de números mediante preguntas sencillas, ilustraciones y pequeños retos.
 
-El proyecto está creado y dirigido por su desarrollador, con apoyo de **ChatGPT (OpenAI, versión actual)** como asistente de inteligencia artificial para ideación, programación, revisión y documentación. Las decisiones del producto y su dirección corresponden a su creador.
+El proyecto está creado y dirigido por su desarrollador, con apoyo de **ChatGPT (OpenAI)** como asistente de inteligencia artificial para ideación, programación, revisión y documentación. Las decisiones del producto y su dirección corresponden a su creador.
 
 ## 🌱 Primera versión gratuita para la web
 
