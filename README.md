@@ -64,5 +64,5 @@ Modi se construye paso a paso con el propósito de convertir el aprendizaje bás
 
 **Proyecto:** Modi — aprender jugando  
 **Desarrollo y dirección:** creador del proyecto  
-**Asistencia de IA:** ChatGPT (OpenAI, versión actual)  
+**Asistencia de IA:** ChatGPT (OpenAI, Astra)  
 **Versión:** web gratuita en desarrollo
