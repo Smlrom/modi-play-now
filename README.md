@@ -1,3 +1,4 @@
+![image](https://github.com/Smlrom/modi-play-now/blob/a31f7cf9073ba347659a88ac8bcc50a1f08d6903/modi.png)
 # Modi — aprender jugando
 
 **Modi** es un proyecto educativo interactivo pensado para que niñas y niños practiquen habilidades iniciales de lectura y reconocimiento de números mediante preguntas sencillas, ilustraciones y pequeños retos.
