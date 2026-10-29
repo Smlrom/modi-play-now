@@ -28,7 +28,7 @@ function Costume({ skinId }: { skinId: string }) {
         <span className="absolute left-1/2 top-[17%] -translate-x-1/2 z-20 w-[42%] h-[6%] rounded-full bg-amber-700 border-b-2 border-amber-900 shadow-sm" aria-hidden="true" />
         <span className="absolute left-1/2 top-[10%] -translate-x-1/2 z-20 w-[27%] h-[10%] rounded-t-full bg-amber-400 border-2 border-amber-700 shadow-sm" aria-hidden="true" />
         {/* Overol ajustado al torso */}
-        <span className="absolute left-[25%] top-[54%] z-10 w-[50%] h-[33%] rounded-t-xl rounded-b-[30%] bg-emerald-600 border-2 border-emerald-800 shadow-md" aria-hidden="true">
+        <span className="absolute left-[33%] top-[63%] z-10 w-[33%] h-[25%] rounded-t-xl rounded-b-[30%] bg-emerald-600 border-2 border-emerald-800 shadow-md" aria-hidden="true">
           <i className="absolute left-[15%] top-0 h-[72%] w-[14%] rounded-b bg-emerald-300 border-x border-emerald-800" />
           <i className="absolute right-[15%] top-0 h-[72%] w-[14%] rounded-b bg-emerald-300 border-x border-emerald-800" />
           <i className="absolute left-1/2 top-[38%] -translate-x-1/2 text-[8px] not-italic">🌻</i>
