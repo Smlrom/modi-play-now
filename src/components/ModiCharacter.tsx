@@ -24,9 +24,9 @@ function Costume({ skinId }: { skinId: string }) {
   if (skinId === "farmer") {
     return (
       <>
-        {/* Sombrero levantado y centrado sobre las orejas */}
-        <span className="absolute left-1/2 top-[13%] -translate-x-1/2 z-20 w-[34%] h-[4%] rounded-full bg-amber-700 border-b-2 border-amber-900 shadow-sm" aria-hidden="true" />
-        <span className="absolute left-1/2 top-[7%] -translate-x-1/2 z-20 w-[23%] h-[8%] rounded-t-full bg-amber-400 border-2 border-amber-700 shadow-sm" aria-hidden="true" />
+        {/* Sombrero bajado para apoyar la copa sobre la cabeza */}
+        <span className="absolute left-1/2 top-[22%] -translate-x-1/2 z-20 w-[36%] h-[5%] rounded-full bg-amber-700 border-b-2 border-amber-900 shadow-sm" aria-hidden="true" />
+        <span className="absolute left-1/2 top-[14%] -translate-x-1/2 z-20 w-[25%] h-[10%] rounded-t-full bg-amber-400 border-2 border-amber-700 shadow-sm" aria-hidden="true" />
         {/* Overol más pequeño para seguir el torso sin cubrir demasiado al conejo */}
         <span className="absolute left-[35%] top-[64%] z-10 w-[30%] h-[21%] rounded-t-lg rounded-b-[30%] bg-emerald-600 border-2 border-emerald-800 shadow-sm" aria-hidden="true">
           <i className="absolute left-[17%] top-0 h-[68%] w-[12%] rounded-b bg-emerald-300 border-x border-emerald-800" />
@@ -42,8 +42,8 @@ function Costume({ skinId }: { skinId: string }) {
   if (skinId === "astronaut") {
     return (
       <>
-        {/* Casco más compacto, elevado y centrado en la cabeza */}
-        <span className="absolute left-1/2 top-[7%] -translate-x-1/2 z-10 w-[52%] h-[39%] rounded-[46%] border-[2px] border-slate-100 bg-sky-300/15 shadow-[0_0_0_1px_rgba(56,189,248,0.8)]" aria-hidden="true">
+        {/* Casco centrado y descendido para rodear la cabeza, no quedar suspendido */}
+        <span className="absolute left-1/2 top-[14%] -translate-x-1/2 z-20 w-[56%] h-[43%] rounded-[46%] border-[2px] border-slate-100 bg-sky-300/15 shadow-[0_0_0_1px_rgba(56,189,248,0.8)]" aria-hidden="true">
           <i className="absolute right-[10%] top-[17%] w-[14%] h-[7%] rounded-full bg-white/80" />
         </span>
         {/* Traje reducido y centrado en el torso */}
@@ -60,9 +60,9 @@ function Costume({ skinId }: { skinId: string }) {
   if (skinId === "robot") {
     return (
       <>
-        {/* Antena corta y colocada justo encima de la cabeza */}
-        <span className="absolute left-1/2 top-[8%] -translate-x-1/2 z-10 h-[6%] w-[2.5%] rounded-sm bg-slate-500" aria-hidden="true" />
-        <span className="absolute left-1/2 top-[3%] -translate-x-1/2 z-20 w-[10%] h-[7%] rounded-full bg-cyan-400 border-2 border-slate-500 shadow-sm" aria-hidden="true" />
+        {/* Antena conectada a la parte superior de la cabeza */}
+        <span className="absolute left-1/2 top-[14%] -translate-x-1/2 z-20 h-[7%] w-[2.5%] rounded-sm bg-slate-500" aria-hidden="true" />
+        <span className="absolute left-1/2 top-[8%] -translate-x-1/2 z-20 w-[10%] h-[7%] rounded-full bg-cyan-400 border-2 border-slate-500 shadow-sm" aria-hidden="true" />
         {/* Armadura estrecha y baja para ajustarse al cuerpo */}
         <span className="absolute left-[33%] top-[63%] z-10 w-[34%] h-[23%] rounded-lg bg-gradient-to-b from-slate-300 to-slate-500 border-2 border-slate-600 shadow-sm" aria-hidden="true">
           <i className="absolute left-[14%] top-[20%] w-[20%] h-[18%] rounded-sm bg-cyan-300 border border-slate-600" />
@@ -78,8 +78,8 @@ function Costume({ skinId }: { skinId: string }) {
   if (skinId === "blocks") {
     return (
       <>
-        {/* Banda pequeña situada en la parte superior de la cabeza */}
-        <span className="absolute left-1/2 top-[17%] -translate-x-1/2 z-20 w-[29%] h-[6%] rounded-md bg-orange-500 border-2 border-amber-700 shadow-sm" aria-hidden="true">
+        {/* Banda descendida para quedar apoyada sobre la frente y la cabeza */}
+        <span className="absolute left-1/2 top-[23%] -translate-x-1/2 z-20 w-[32%] h-[7%] rounded-md bg-orange-500 border-2 border-amber-700 shadow-sm" aria-hidden="true">
           <i className="absolute left-[15%] top-[20%] w-[20%] h-[25%] rounded-full bg-amber-200" />
           <i className="absolute right-[15%] top-[20%] w-[20%] h-[25%] rounded-full bg-amber-200" />
         </span>
